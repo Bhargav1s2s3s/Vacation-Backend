@@ -1,0 +1,16 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 10-alter-feed-images-add-pk-id
+      author: bhargav
+      changes:
+        - addColumn:
+            tableName: feed_images
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false

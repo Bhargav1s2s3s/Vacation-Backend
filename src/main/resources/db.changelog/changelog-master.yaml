@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: 01-initial-tables.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 02-alter-forgot-user-password-pk-id.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 03-alter-feed-images-pk-id.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 04-alter-boolean-for-verified-email.yaml
+      relativeToChangelogFile: true

@@ -1,0 +1,12 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 11-alter-table-to-add-is-verified-flag
+      author: bhargav
+      changes:
+        - addColumn:
+            tableName: profile
+            columns:
+              - column:
+                  name: is_verified
+                  type: boolean
