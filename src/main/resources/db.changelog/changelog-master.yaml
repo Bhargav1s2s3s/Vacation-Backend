@@ -14,3 +14,11 @@ databaseChangeLog:
   - include:
       file: 04-alter-boolean-for-verified-email.yaml
       relativeToChangelogFile: true
+
+  - include:
+     file: 05-alter-profile-make-email-id-unique.yaml
+     relativeToChangelogFile: true
+
+  - include:
+      file: 06-refresh-of-seamless-login.yaml
+      relativeToChangelogFile: true

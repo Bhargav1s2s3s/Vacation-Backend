@@ -27,3 +27,8 @@ spring:
 
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+jwt:
+  secret: fX9pL2mK8nQ4rT7vY1wZ3uA6bC0dE5gH8iJ2kM4nO6pQ9rS1tU3vW5xY7zA9bC2eF4gH6iJ8kL0mN2oP4qR6sT8uV0wX2yZ4aB6cD8eF0gH2iJ4kL6mN8oP0qR2sT4u
+  expiration: 180000
+  refresh-expiration: 300000

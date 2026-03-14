@@ -1,0 +1,10 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 6-alter-profile-email-unique
+      author: bhargav
+      changes:
+        - addUniqueConstraint:
+            tableName: profile
+            columnNames: email_id
+            constraintName: uq_profile_email_id

@@ -10,6 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -24,8 +25,8 @@ public class GlobalExceptionHandler {
                 VacationErrorExceptionDto.builder()
                         .code(errorCode)
                         .message(ex.getMessage())
-                        .timestamp(LocalDateTime.from(Instant.now()))
-                        .path(req.getDescription(true).replace("uri=", ""))
+                        .timestamp(LocalDateTime.now(ZoneOffset.UTC))
+                        .path(req.getDescription(false).replace("uri=", ""))
                         .build()
         );
     }

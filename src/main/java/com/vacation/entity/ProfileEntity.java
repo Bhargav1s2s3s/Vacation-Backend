@@ -29,7 +29,7 @@ public class ProfileEntity {
     @Column(name = "last_name", length = 30)
     private String lastName;
 
-    @Column(name = "email_id", length = 50)
+    @Column(name = "email_id", length = 50, unique = true)
     private String emailId;
 
     @Column(name = "location", length = 100)

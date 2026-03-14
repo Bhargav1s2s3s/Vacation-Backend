@@ -2,10 +2,12 @@ package com.vacation.error.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Builder
+@Getter
 public class VacationErrorExceptionDto {
     private Enum code;
 
