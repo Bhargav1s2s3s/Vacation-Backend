@@ -1,8 +1,9 @@
-package com.vacation.common.config;
+package com.vacation.auth.controller;
 
 import com.vacation.auth.dto.LoginOrSignUpRequest;
 import com.vacation.auth.dto.LoginResponse;
 import com.vacation.auth.service.UserAuthenticationService;
+import com.vacation.common.config.BaseController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

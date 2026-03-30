@@ -1,6 +1,6 @@
-package com.vacation.core.plan.repository;
+package com.vacation.core.repository;
 
-import com.vacation.core.plan.entity.PlanLookupEntity;
+import com.vacation.core.entity.PlanLookupEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

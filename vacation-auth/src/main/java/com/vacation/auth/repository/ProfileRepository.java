@@ -1,6 +1,6 @@
-package com.vacation.auth.profile.repository;
+package com.vacation.auth.repository;
 
-import com.vacation.auth.profile.entity.ProfileEntity;
+import com.vacation.auth.entity.ProfileEntity;
 import com.vacation.auth.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

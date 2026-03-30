@@ -1,6 +1,6 @@
-package com.vacation.core.feed.entity;
+package com.vacation.core.entity;
 
-import com.vacation.auth.profile.entity.ProfileEntity;
+import com.vacation.auth.entity.ProfileEntity;
 
 import jakarta.persistence.*;
 import lombok.Data;

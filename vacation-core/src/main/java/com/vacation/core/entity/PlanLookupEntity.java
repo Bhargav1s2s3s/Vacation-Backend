@@ -1,6 +1,6 @@
-package com.vacation.core.plan.entity;
+package com.vacation.core.entity;
 
-import com.vacation.auth.profile.entity.ProfileEntity;
+import com.vacation.auth.entity.ProfileEntity;
 
 import com.vacation.common.enums.UserActionEnum;
 import jakarta.persistence.*;

@@ -2,16 +2,20 @@ package com.vacation.auth.service.impl;
 
 import com.vacation.auth.dto.LoginOrSignUpRequest;
 import com.vacation.auth.dto.LoginResponse;
-import com.vacation.auth.profile.entity.ProfileEntity;
+import com.vacation.auth.entity.ProfileEntity;
 import com.vacation.auth.entity.RefreshTokenEntity;
 import com.vacation.auth.entity.UserEntity;
+import com.vacation.auth.exception.EmailAlreadyExistedEx;
+import com.vacation.auth.exception.InvalidTokenException;
+import com.vacation.auth.exception.UserAuthenticationException;
+import com.vacation.auth.exception.UsernameAlreadyExsitedEx;
 import com.vacation.common.error.code.VacationErrorCode;
-import com.vacation.common.error.exception.*;
-import com.vacation.auth.profile.repository.ProfileRepository;
+import com.vacation.auth.repository.ProfileRepository;
 import com.vacation.auth.repository.RefreshTokenRepository;
 import com.vacation.auth.repository.UserRepository;
 import com.vacation.auth.service.UserAuthenticationService;
 import com.vacation.auth.security.JwtService;
+import com.vacation.common.error.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
@@ -95,7 +99,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
 
         // 2. Validate password
         if (!bCryptPasswordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new UserAuthenticationException("Invalid credentials");
+            throw new UserAuthenticationException("Invalid Password");
         }
 
         // 3. Get profile — throw if not found

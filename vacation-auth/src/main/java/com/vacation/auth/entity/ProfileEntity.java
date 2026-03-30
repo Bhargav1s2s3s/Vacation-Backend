@@ -1,9 +1,8 @@
-package com.vacation.auth.profile.entity;
+package com.vacation.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.vacation.auth.entity.UserEntity;
 
 import java.util.UUID;
 

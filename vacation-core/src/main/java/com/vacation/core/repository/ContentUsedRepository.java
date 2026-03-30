@@ -1,6 +1,6 @@
-package com.vacation.core.feed.repository;
+package com.vacation.core.repository;
 
-import com.vacation.core.feed.entity.ContentUsedEntity;
+import com.vacation.core.entity.ContentUsedEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

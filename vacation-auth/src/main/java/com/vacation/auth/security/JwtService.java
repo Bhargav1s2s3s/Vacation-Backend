@@ -1,7 +1,7 @@
 package com.vacation.auth.security;
 
+import com.vacation.auth.exception.InvalidTokenException;
 import com.vacation.common.error.code.VacationErrorCode;
-import com.vacation.common.error.exception.InvalidTokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;

@@ -1,6 +1,6 @@
-package com.vacation.core.feed.repository;
+package com.vacation.core.repository;
 
-import com.vacation.core.feed.entity.FeedImageEntity;
+import com.vacation.core.entity.FeedImageEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
