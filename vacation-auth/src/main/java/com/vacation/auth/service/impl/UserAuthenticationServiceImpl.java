@@ -88,38 +88,54 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
     @Transactional
     @Override
     public LoginResponse loginUserWithCred(LoginOrSignUpRequest request) {
-        if (request.getUsername() == null || request.getPassword() == null) {
-            throw new UserAuthenticationException("Email or password required for login");
+        if (request.getPassword() == null) {
+            throw new UserAuthenticationException("Password is required for login");
         }
 
-        // 1. Find user — throw if not found
-        UserEntity user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        VacationErrorCode.USER_NOT_FOUND, "Username not registered"));
+        UserEntity user;
+        ProfileEntity profile;
+        String email;
 
-        // 2. Validate password
+        if (request.getEmail() != null && !request.getEmail().isBlank()) {
+            // Login with email
+            profile = profileRepository.findByEmailId(request.getEmail())
+                    .orElseThrow(() -> new ResourceNotFoundException(
+                            VacationErrorCode.EMAIL_NOT_FOUND, "Email not registered"));
+            user = profile.getUser();
+            email = request.getEmail();
+
+        } else if (request.getUsername() != null && !request.getUsername().isBlank()) {
+            // Login with username
+            user = userRepository.findByUsername(request.getUsername())
+                    .orElseThrow(() -> new ResourceNotFoundException(
+                            VacationErrorCode.USER_NOT_FOUND, "Username not registered"));
+            profile = profileRepository.findByUser(user)
+                    .orElseThrow(() -> new ResourceNotFoundException(
+                            VacationErrorCode.USER_NOT_FOUND, "Profile not found"));
+            email = profile.getEmailId();
+
+        } else {
+            throw new UserAuthenticationException("Please provide either email or username");
+        }
+
+        // Validate password
         if (!bCryptPasswordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new UserAuthenticationException("Invalid Password");
         }
 
-        // 3. Get profile — throw if not found
-        ProfileEntity profile = profileRepository.findByUser(user)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        VacationErrorCode.USER_NOT_FOUND, "Profile not found"));
-
         // Generate access token
-        String accessToken = jwtService.generateAccessToken(user.getId(), request.getEmail());
+        String accessToken = jwtService.generateAccessToken(user.getId(), email);
         log.info("access token has been created after sign-in: {}", accessToken);
 
         // Generate refresh token
-        String refreshToken = jwtService.generateRefreshToken(user.getId(), request.getEmail());
+        String refreshToken = jwtService.generateRefreshToken(user.getId(), email);
         log.info("refresh token has been created after sign-in: {}", refreshToken);
 
         // store refresh token
         tokenSavedInDbWithUserId(user, refreshToken);
         log.info("user refresh saved in: {}", user);
 
-        log.info("User logged in successfully: {}", request.getUsername());
+        log.info("User logged in successfully: {}", user.getUsername());
         return LoginResponse.builder()
                 .code(200)
                 .accessToken(accessToken)

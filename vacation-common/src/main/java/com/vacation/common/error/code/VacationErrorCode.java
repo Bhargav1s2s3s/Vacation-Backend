@@ -20,7 +20,10 @@ public enum VacationErrorCode {
 
     // 409
     USER_ALREADY_EXISTS(HttpStatus.CONFLICT),
-    EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT);
+    EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT),
+
+    // Password Reset
+    PASSWORD_RESET_TOKEN_INVALID(HttpStatus.BAD_REQUEST);
 
     private final HttpStatus status;
 
