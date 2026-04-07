@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: vacation-core
+
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,mappings
+  endpoint:
+    health:
+      show-details: when_authorized

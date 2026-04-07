@@ -1,0 +1,26 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: vacation
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+jwt:
+  secret: ${JWT_SECRET:fX9pL2mK8nQ4rT7vY1wZ3uA6bC0dE5gH8iJ2kM4nO6pQ9rS1tU3vW5xY7zA9bC2eF4gH6iJ8kL0mN2oP4qR6sT8uV0wX2yZ4aB6cD8eF0gH2iJ4kL6mN8oP0qR2sT4u}
+  expiration: ${JWT_EXPIRATION:180000}
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:300000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,mappings
+  endpoint:
+    health:
+      show-details: when_authorized
