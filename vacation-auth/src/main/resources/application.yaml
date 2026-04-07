@@ -14,8 +14,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME:bbbhargav01@gmail.com}
-    password: ${MAIL_PASSWORD:rsre obsz szuw gvbd}
+    username: ${MAIL_USERNAME: enter your email}
+    password: ${MAIL_PASSWORD: enter your google app password}
     properties:
       mail:
         smtp:
@@ -30,7 +30,7 @@ jwt:
 
 password-reset:
   token-expiry-minutes: ${PASSWORD_RESET_EXPIRY:15}
-  reset-url: ${PASSWORD_RESET_URL:http://localhost:8080/mahe/vacation/auth/reset-password}
+  reset-url: ${PASSWORD_RESET_URL:http://localhost:8080/your API endpoint }
 
 management:
   endpoints:
