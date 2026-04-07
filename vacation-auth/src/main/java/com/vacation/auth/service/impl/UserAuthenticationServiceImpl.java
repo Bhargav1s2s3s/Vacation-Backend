@@ -69,11 +69,11 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
         log.info("email inserted into profile entity: {}", user);
 
         // Generate access token
-        String access = jwtService.generateAccessToken(user.getId(), profile.getEmailId());
+        String access = jwtService.generateAccessToken(user.getId(), String.valueOf(profile.getId()));
         log.info("access token has been created after sign-up: {}", access);
 
         // Generate refresh token
-        String refresh = jwtService.generateRefreshToken(user.getId(), request.getEmail());
+        String refresh = jwtService.generateRefreshToken(user.getId(), String.valueOf(profile.getId()));
         log.info("refresh token has been created sign-up: {}", refresh);
 
         tokenSavedInDbWithUserId(user, refresh);
@@ -124,11 +124,11 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
         }
 
         // Generate access token
-        String accessToken = jwtService.generateAccessToken(user.getId(), email);
+        String accessToken = jwtService.generateAccessToken(user.getId(), profile.getId().toString());
         log.info("access token has been created after sign-in: {}", accessToken);
 
         // Generate refresh token
-        String refreshToken = jwtService.generateRefreshToken(user.getId(), email);
+        String refreshToken = jwtService.generateRefreshToken(user.getId(), profile.getId().toString());
         log.info("refresh token has been created after sign-in: {}", refreshToken);
 
         // store refresh token

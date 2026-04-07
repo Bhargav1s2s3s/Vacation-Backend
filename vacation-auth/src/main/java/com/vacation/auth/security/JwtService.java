@@ -31,13 +31,13 @@ public class JwtService {
         return buildToken(userId, email, expiration);
     }
 
-    public String generateRefreshToken(UUID userId, String email) {
-        return buildToken(userId, email, refreshExpiration);
+    public String generateRefreshToken(UUID userId, String profileId) {
+        return buildToken(userId, profileId, refreshExpiration);
     }
 
-    private String buildToken(UUID userId, String email, long expiry) {
+    private String buildToken(UUID userId, String profileId, long expiry) {
         return Jwts.builder()
-                .subject(email)
+                .subject(profileId)
                 .claim("userId", userId.toString())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiry))

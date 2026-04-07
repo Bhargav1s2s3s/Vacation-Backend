@@ -17,6 +17,7 @@ public enum VacationErrorCode {
     // 404
     USER_NOT_FOUND(HttpStatus.NOT_FOUND),
     EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND),
+    PROFILE_NOT_FOUND(HttpStatus.NOT_FOUND),
 
     // 409
     USER_ALREADY_EXISTS(HttpStatus.CONFLICT),

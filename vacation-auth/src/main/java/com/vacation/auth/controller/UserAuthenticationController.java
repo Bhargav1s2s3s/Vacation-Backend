@@ -30,7 +30,7 @@ public class UserAuthenticationController extends BaseController {
                 .body(userAuthenticationService.loginUserWithCred(request));
     }
 
-    @GetMapping(value = "/auth/get-new-tokens")
+    @GetMapping(value = "/auth/get-new-refresh-tokens")
     public ResponseEntity<LoginResponse> refreshToken(@RequestParam String refreshToken) {
         return ResponseEntity
                 .status(HttpStatus.OK)
