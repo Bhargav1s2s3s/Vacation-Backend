@@ -30,7 +30,7 @@ jwt:
 
 password-reset:
   token-expiry-minutes: ${PASSWORD_RESET_EXPIRY:15}
-  reset-url: ${PASSWORD_RESET_URL:http://localhost:8080/your API endpoint }
+  reset-url: ${PASSWORD_RESET_URL:http://localhost:8080/your API endpoint}
 
 management:
   endpoints:
