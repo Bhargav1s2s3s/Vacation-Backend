@@ -8,7 +8,6 @@ public record ProfileUpdateResponse(
         String firstName,
         String lastName,
         String location,
-        String mobileNumber,
         String message
 ) {
 }

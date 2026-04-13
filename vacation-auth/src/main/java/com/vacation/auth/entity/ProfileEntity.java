@@ -34,7 +34,4 @@ public class ProfileEntity {
 
     @Column(name = "location", length = 100)
     private String location;
-
-    @Column(name = "mobile_number", length = 15)
-    private String mobileNumber;
 }
