@@ -24,7 +24,16 @@ public enum VacationErrorCode {
     EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT),
 
     // Password Reset
-    PASSWORD_RESET_TOKEN_INVALID(HttpStatus.BAD_REQUEST);
+    PASSWORD_RESET_TOKEN_INVALID(HttpStatus.BAD_REQUEST),
+
+    // Feed
+    FEED_NOT_FOUND(HttpStatus.NOT_FOUND),
+    FEED_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND),
+    MEDIA_NOT_FOUND(HttpStatus.NOT_FOUND),
+    FEED_ALREADY_LIKED(HttpStatus.CONFLICT),
+    FEED_NOT_LIKED(HttpStatus.BAD_REQUEST),
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND),
+    UNAUTHORIZED_ACTION(HttpStatus.FORBIDDEN);
 
     private final HttpStatus status;
 

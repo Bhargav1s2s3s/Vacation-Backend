@@ -1,0 +1,83 @@
+databaseChangeLog:
+
+  ##################################################
+  # CREATE media TABLE (centralized for all media types)
+  ##################################################
+  - changeSet:
+      id: 16-create-media-table
+      author: bhargav
+      changes:
+        - createTable:
+            tableName: media
+            columns:
+
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: media_type
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: reference_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: object_key
+                  type: TEXT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+        - createIndex:
+            tableName: media
+            indexName: idx_media_type_ref
+            columns:
+              - column:
+                  name: media_type
+              - column:
+                  name: reference_id
+
+  ##################################################
+  # MIGRATE feed_images DATA → media (media_type = 'FEED')
+  ##################################################
+  - changeSet:
+      id: 17-migrate-feed-images-to-media
+      author: bhargav
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: feed_images
+      changes:
+        - sql:
+            sql: >
+              INSERT INTO media (id, media_type, reference_id, object_key, created_at)
+              SELECT id, 'FEED', feed_id, object_key, created_at
+              FROM feed_images;
+
+  ##################################################
+  # DROP old feed_images TABLE
+  ##################################################
+  - changeSet:
+      id: 18-drop-feed-images-table
+      author: bhargav
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: feed_images
+      changes:
+        - dropTable:
+            tableName: feed_images

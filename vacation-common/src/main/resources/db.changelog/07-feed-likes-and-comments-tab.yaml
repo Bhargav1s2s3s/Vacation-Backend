@@ -1,0 +1,120 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 9-drop-comments-column-from-feed
+      author: bhargav
+      changes:
+        - dropColumn:
+            tableName: feed
+            columnName: comments
+
+##################################################
+# FEED LIKES TABLE
+##################################################
+  - changeSet:
+      id: 6-create-feed-likes-table
+      author: bhargav
+      changes:
+        - createTable:
+            tableName: feed_likes
+            columns:
+
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+
+              - column:
+                  name: feed_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: profile_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+        - addForeignKeyConstraint:
+            baseTableName: feed_likes
+            baseColumnNames: feed_id
+            referencedTableName: feed
+            referencedColumnNames: id
+            constraintName: fk_feed_likes_feed
+
+        - addForeignKeyConstraint:
+            baseTableName: feed_likes
+            baseColumnNames: profile_id
+            referencedTableName: profile
+            referencedColumnNames: id
+            constraintName: fk_feed_likes_profile
+
+        - addUniqueConstraint:
+            tableName: feed_likes
+            columnNames: feed_id, profile_id
+            constraintName: uk_feed_like_unique
+
+
+  ##################################################
+  # FEED COMMENTS TABLE
+  ##################################################
+
+  - changeSet:
+      id: 7-create-feed-comments-table
+      author: bhargav
+      changes:
+        - createTable:
+            tableName: feed_comments
+            columns:
+
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+
+              - column:
+                  name: feed_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: profile_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: comment_text
+                  type: text
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+        - addForeignKeyConstraint:
+            baseTableName: feed_comments
+            baseColumnNames: feed_id
+            referencedTableName: feed
+            referencedColumnNames: id
+            constraintName: fk_feed_comments_feed
+
+        - addForeignKeyConstraint:
+            baseTableName: feed_comments
+            baseColumnNames: profile_id
+            referencedTableName: profile
+            referencedColumnNames: id
+            constraintName: fk_feed_comments_profile
