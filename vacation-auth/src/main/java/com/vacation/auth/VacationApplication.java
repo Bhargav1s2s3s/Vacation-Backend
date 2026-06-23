@@ -16,5 +16,4 @@ public class VacationApplication {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		SpringApplication.run(VacationApplication.class, args);
 	}
-
 }

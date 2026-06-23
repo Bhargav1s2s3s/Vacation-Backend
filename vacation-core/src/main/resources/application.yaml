@@ -19,3 +19,11 @@ management:
   endpoint:
     health:
       show-details: when_authorized
+
+storage:
+  bucket: ${STORAGE_BUCKET:vacation-uploads}
+  region: ${STORAGE_REGION:ap-south-1}
+  endpoint: ${STORAGE_ENDPOINT:http://localhost:4566}
+  access-key: ${STORAGE_ACCESS_KEY:test}
+  secret-key: ${STORAGE_SECRET_KEY:test}
+  presign-expiry-minutes: ${STORAGE_PRESIGN_EXPIRY:15}

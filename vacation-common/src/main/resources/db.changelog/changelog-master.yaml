@@ -22,3 +22,19 @@ databaseChangeLog:
   - include:
       file: 06-refresh-of-seamless-login.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: 07-feed-likes-and-comments-tab.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 08-added-files-table-handle-all-types.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 09-alter-feed-for-social.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 10-centralized-images-table.yaml
+      relativeToChangelogFile: true

@@ -1,0 +1,101 @@
+databaseChangeLog:
+
+  ##################################################
+  # ADD comment_count TO feed TABLE
+  ##################################################
+  - changeSet:
+      id: 11-add-comment-count-to-feed
+      author: bhargav
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: feed
+                columnName: comment_count
+      changes:
+        - addColumn:
+            tableName: feed
+            columns:
+              - column:
+                  name: comment_count
+                  type: INTEGER
+                  defaultValueNumeric: 0
+
+  ##################################################
+  # RENAME image → object_key IN feed_images
+  ##################################################
+  - changeSet:
+      id: 12-rename-image-to-object-key
+      author: bhargav
+      preConditions:
+        - onFail: MARK_RAN
+        - columnExists:
+            tableName: feed_images
+            columnName: image
+      changes:
+        - renameColumn:
+            tableName: feed_images
+            oldColumnName: image
+            newColumnName: object_key
+            columnDataType: TEXT
+
+  ##################################################
+  # ADD created_at TO feed_images
+  ##################################################
+  - changeSet:
+      id: 13-add-created-at-to-feed-images
+      author: bhargav
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: feed_images
+                columnName: created_at
+      changes:
+        - addColumn:
+            tableName: feed_images
+            columns:
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  ##################################################
+  # ADD NOT NULL TO feed_images.object_key
+  ##################################################
+  - changeSet:
+      id: 14-add-not-null-object-key
+      author: bhargav
+      changes:
+        - addNotNullConstraint:
+            tableName: feed_images
+            columnName: object_key
+            columnDataType: TEXT
+
+  ##################################################
+  # INDEXES
+  ##################################################
+  - changeSet:
+      id: 15-add-feed-indexes
+      author: bhargav
+      changes:
+        - createIndex:
+            tableName: feed
+            indexName: idx_feed_profile_id
+            columns:
+              - column:
+                  name: profile_id
+
+        - createIndex:
+            tableName: feed_images
+            indexName: idx_feed_images_feed_id
+            columns:
+              - column:
+                  name: feed_id
+
+        - createIndex:
+            tableName: feed_comments
+            indexName: idx_feed_comments_feed_id
+            columns:
+              - column:
+                  name: feed_id
